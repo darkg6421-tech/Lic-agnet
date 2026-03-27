@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvestPro - Smart Investment Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .cta-button {
+            background: #ff6b35;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,107,53,0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat {
+            text-align: center;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ff6b35;
+            display: block;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e3c72;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #ff6b35;
+            margin-bottom: 1rem;
+        }
+
+        /* Investment Cards */
+        .investments {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .investment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .investment-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .investment-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .investment-header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .investment-change.positive {
+            color: #10b981;
+        }
+
+        .investment-change.negative {
+            color: #ef4444;
+        }
+
+        .investment-body {
+            padding: 1.5rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Dashboard Preview */
+        .dashboard-preview {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .change {
+            font-size: 1.1rem;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-chart-line"></i> InvestPro
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#investments">Markets</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+            <a href="#signup" class="cta-button">Get Started</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Invest Smarter, Grow Faster</h1>
+            <p>Discover winning investment opportunities with real-time market data, AI-powered insights, and expert analysis. Start building your wealth today.</p>
+            <a href="#signup" class="cta-button" style="font-size: 1.2rem; padding: 1rem 2rem;">Start Investing Now</a>
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-number">$</span>
+                <span>5.2B</span>
+                <div>AUM</div>
+            </div>
+            <div class="stat">
+                <span class="stat-number">250K+</span>
+                <div>Active Investors</div>
+            </div>
+            <div class="stat">
+                <span class="stat-number">18.7%</span>
+                <div>Average Return</div>
+            </div>
+            <div class="stat">
+                <span class="stat-number">24/7</span>
+                <div>Market Access</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2 class="section-title">Why Choose InvestPro?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>AI-Powered Insights</h3>
+                <p>Advanced algorithms analyze market trends and predict opportunities before they happen.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Bank-Level Security</h3>
+                <p>Your investments are protected with enterprise-grade encryption and 2FA authentication.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Mobile First</h3>
+                <p>Trade anywhere, anytime with our intuitive mobile app and lightning-fast execution.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <h3>Diversified Portfolios</h3>
+                <p>Access stocks, crypto, ETFs, and real estate all in one platform.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>24/7 Support</h3>
+                <p>Expert advisors available round the clock to help you make informed decisions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <h3>No Hidden Fees</h3>
+                <p>Transparent pricing with zero commission on trades and no account minimums.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investments Section -->
+    <section id="investments" class="investments">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <h2 class="section-title">Live Markets</h2>
+            <div class="investment-grid">
+                <div class="investment-card">
+                    <div class="investment-header">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h3>Bitcoin <i class="fab fa-bitcoin"></i></h3>
+                                <span class="price">$67,234</span>
+                                <span class="change positive">+2.4%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="investment-body">
+                        <div style="height: 60px; background: #f0f0f0; border-radius: 5px; margin-bottom: 1rem;"></div>
+                        <p>24h Volume: $28.4B</p>
+                    </div>
+                </div>
+
+                <div class="investment-card">
+                    <div class="investment-header">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h3>Apple <i class="fab fa-apple"></i></h3>
+                                <span class="price">$187.45</span>
+                                <span class="change positive">+1.2%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="investment-body">
+                        <div style="height: 60px; background: #f0f0f0; border-radius: 5px; margin-bottom: 1rem;"></div>
+                        <p>P/E Ratio: 32.4</p>
+                    </div>
+                </div>
+
+                <div class="investment-card">
+                    <div class="investment-header">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h3>Ethereum <i class="fab fa-ethereum"></i></h3>
+                                <span class="price">$3,284</span>
+                                <span class="change negative">-0.8%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="investment-body">
+                        <div style="height: 60px; background: #f0f0f0; border-radius: 5px; margin-bottom: 1rem;"></div>
+                        <p>24h Volume: $14.2B</p>
+                    </div>
+                </div>
+
+                <div class="investment-card">
+                    <div class="investment-header">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h3>Tesla <i class="fab fa-tesla"></i></h3>
+                                <span class="price">$245.67</span>
+                                <span class="change positive">+3.1%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="investment-body">
+                        <div style="height: 60px; background: #f0f0f0; border-radius: 5px; margin-bottom: 1rem;"></div>
+                        <p>Market Cap: $780B</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview -->
+    <section class="features">
+        <h2 class="section-title">Your Investment Dashboard</h2>
+        <div class="dashboard-preview" style="max-width: 800px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                <div>
+                    <h4>Portfolio Value</h4>
+                    <div style="font-size: 2.5rem; font-weight: bold; color: #10b981;">$124,567</div>
+                    <div style="color: #10b981;">+2.3% today</div>
+                </div>
+                <div>
+                    <h4>Daily P&L</h4>
+                    <div style="font-size: 2rem; font-weight: bold; color: #10b981;">+$2,847</div>
+                </div>
+                <div>
+                    <h4>Monthly Return</h4>
+                    <div style="font-size: 1.8rem; color: #059669;">+8.4%</div>
+                </div>
+                <div>
+                    <h4>Top Holding</h4>
+                    <div style="font-weight: bold;">Bitcoin</div>
+                    <div>32.4% of portfolio</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="signup" class="cta-section">
+        <div style="max-width: 600px; margin: 0 auto; padding: 0 2rem;">
+            <h2>Ready to Start Investing?</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Join 250,000+ investors who trust InvestPro for their financial future.</p>
+            <a href="#" class="cta-button" style="background: white; color: #ff6b35; font-size: 1.2rem; padding: 1rem 2.5rem;">Create Free Account</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h4>Product</h4>
+                <ul style="list-style: none;">
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">Trading</a></li>
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">Portfolio</a></li>
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">Analytics</a></li>
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">Mobile App</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Company</h4>
+                <ul style="list-style: none;">
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">About</a></li>
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">Careers</a></li
